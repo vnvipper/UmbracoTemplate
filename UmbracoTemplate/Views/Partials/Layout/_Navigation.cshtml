@@ -25,19 +25,22 @@
     {
         foreach (var item in listItems)
         {
-            <li>
-                @if (!String.IsNullOrEmpty(item.Text))
+            var isHaveChild = item.HasChildren;
+
+            <li class="@(isHaveChild?"dropdown":"")">
+                @if (isHaveChild)
                 {
-                    @item.Text
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">@item.Text
+                    <span class="caret"></span></a>
                 }
-                else if (item.Link != null)
+                else
                 {
-                    <a href="@item.Link.Url" class="@(Umbraco.AssignedContentItem.Url == item.Link.Url ? "active" : null) @(item.HasChildren ? "fh5co-sub-ddown" : null)" target="@item.Link.Target">@item.Link.Text</a>
+                    <a href="@item.Link.Url" class="@(Umbraco.AssignedContentItem.Url == item.Link.Url ? "active" : null)" target="@item.Link.Target">@item.Link.Text</a>
                 }
 
                 @if (item.HasChildren)
                 {
-                    <ul class="sub-menu">
+                    <ul class="dropdown-menu">
                         @RenderChildItems(item.Items)
                     </ul>
                 }
