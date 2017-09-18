@@ -7,7 +7,8 @@ Basic useful feature list:
  * Decouple components by integrating Ninject Ioc container
  * Make query of node in umbraco more easily with IDataService ( support multi site language and you can inject your new logic if you want :) )
  * Use Identity for authentication and login third party
- 
+ * Dynamic menu
+
 # Special things
 
 Example: Get All page by document type
