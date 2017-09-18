@@ -1,0 +1,9 @@
+﻿@using UmbracoTemplate.Models.UmbracoIdentity
+@inherits UmbracoTemplatePage
+@{
+    Layout = "Master.cshtml";
+}
+
+<h2>@Model.Content.Name</h2>
+
+@Html.Partial("~/Views/Partials/Account/_Register.cshtml", new RegisterViewModel())

@@ -1,0 +1,18 @@
+﻿@using RedWillow.MvcToastrFlash
+@model UmbracoTemplate.Models.ViewModels.Script
+
+<script src="~/assets/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/assets/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/assets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/assets/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/assets/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/assets/lib/toastr/toastr.min.js"></script>
+<script src="~/assets/js/script.min.js"></script>
+
+<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+<script>
+    window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+    ga('create','@Model.GoogleAnalyticsId','auto');ga('send','pageview')
+</script>
+<script src="https://www.google-analytics.com/analytics.js" async defer></script>
+@Html.ToastrNotifications()

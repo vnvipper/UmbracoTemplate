@@ -1,0 +1,37 @@
+﻿@inherits UmbracoViewPage<Navigation>
+@using Microsoft.AspNet.Identity
+@using System.Web.Mvc.Html
+@using ClientDependency.Core.Mvc
+@using UmbracoTemplate.Controllers
+@using Umbraco.Web
+@using Umbraco.Web.Models
+@using Umbraco.Web.Controllers
+@using UmbracoTemplate.Controllers.Surface
+
+@{
+    var loginStatusModel = Members.GetCurrentLoginStatus();
+    var logoutModel = new PostRedirectModel();
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    using (Html.BeginUmbracoForm<AccountSurfaceController>("HandleLogout", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => logoutModel.RedirectUrl)
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#">@loginStatusModel.Name</a>
+                @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})*@
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li><a id="registerLink" href="@Model.Register.Url">@Model.Register.Text</a></li>
+        <li><a id="loginLink" href="@Model.Login.Url">@Model.Login.Text</a></li>   
+    </ul>
+}

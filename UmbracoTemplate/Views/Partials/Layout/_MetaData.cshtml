@@ -1,0 +1,24 @@
+﻿@model MetaData
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>@Model.BrowserTitle</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="@Model.Description" />
+<meta name="keywords" content="@Model.Keywords" />
+    
+<!-- Facebook and Twitter integration -->
+<meta property="og:title" content="@Model.Title" />
+<meta property="og:image" content="@Model.ImageUrl" />
+<meta property="og:url" content="@Model.PageUrl" />
+<meta property="og:site_name" content="@Model.SiteName" />
+<meta property="og:description" content="@Model.Description" />
+<meta name="twitter:title" content="@Model.Title" />
+<meta name="twitter:image" content="@Model.ImageUrl" />
+<meta name="twitter:url" content="@Model.ImageUrl" />
+<meta name="twitter:description" content="@Model.Description" />
+
+<link href="~/assets/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/assets/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+<link href="~/assets/lib/toastr/toastr.min.css" rel="stylesheet" />
+@*<link href="~/assets/lib/foundation/css/foundation.min.css" rel="stylesheet" />*@
+<link href="~/assets/css/style.min.css" rel="stylesheet" />
