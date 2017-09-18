@@ -14,9 +14,9 @@ namespace UmbracoTemplate.Infrastructure
 {
     public static class Helpers
     {
-        public static IHtmlString UrlFor<T>(this HtmlHelper helper, string innerText, object htmlAttributes = null) where T: PublishedContentModel
+        public static IHtmlString UrlFor<T>(this HtmlHelper helper, string innerText, object htmlAttributes = null, Func<T, bool> filter = null) where T: PublishedContentModel
         {
-            var page = GetPage<T>();
+            var page = GetPage<T>(filter);
             TagBuilder a = new TagBuilder("a");
             a.Attributes.Add("href", page.Url);
             a.InnerHtml = innerText;
@@ -25,9 +25,9 @@ namespace UmbracoTemplate.Infrastructure
             return MvcHtmlString.Create(a.ToString());
         }
 
-        public static IHtmlString UrlFor<T>(this HtmlHelper helper, object htmlAttributes = null) where T : PublishedContentModel
+        public static IHtmlString UrlFor<T>(this HtmlHelper helper, object htmlAttributes = null, Func<T, bool> filter = null) where T : PublishedContentModel
         {
-            var page = GetPage<T>();
+            var page = GetPage<T>(filter);
             TagBuilder a = new TagBuilder("a");
             a.Attributes.Add("href", page.Url);
             a.InnerHtml = page.Name;
@@ -36,16 +36,50 @@ namespace UmbracoTemplate.Infrastructure
             return MvcHtmlString.Create(a.ToString());
         }
 
-        public static IEnumerable<T> GetPages<T>() where T : PublishedContentModel
+        public static IHtmlString MultiSiteUrlFor<T>(this HtmlHelper helper, string innerText, object htmlAttributes = null, Func<T, bool> filter = null) where T : PublishedContentModel
         {
-            var dataService = DependencyResolver.Current.GetService<IDataService<T>>();
-            return dataService.GetAll();
+            var page = GetPageByCurrentCulture<T>(filter);
+            TagBuilder a = new TagBuilder("a");
+            a.Attributes.Add("href", page.Url);
+            a.InnerHtml = innerText;
+            a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+
+            return MvcHtmlString.Create(a.ToString());
         }
 
-        public static T GetPage<T>() where T : PublishedContentModel
+        public static IHtmlString MultiSiteUrlFor<T>(this HtmlHelper helper, object htmlAttributes = null, Func<T, bool> filter = null) where T : PublishedContentModel
+        {
+            var page = GetPageByCurrentCulture<T>(filter);
+            TagBuilder a = new TagBuilder("a");
+            a.Attributes.Add("href", page.Url);
+            a.InnerHtml = page.Name;
+            a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+
+            return MvcHtmlString.Create(a.ToString());
+        }
+
+        public static IEnumerable<T> GetPages<T>(Func<T, bool> filter = null) where T : PublishedContentModel
         {
             var dataService = DependencyResolver.Current.GetService<IDataService<T>>();
-            return dataService.Get();
+            return dataService.GetAll(filter);
+        }
+
+        public static T GetPage<T>(Func<T, bool> filter = null) where T : PublishedContentModel
+        {
+            var dataService = DependencyResolver.Current.GetService<IDataService<T>>();
+            return dataService.Get(filter);
+        }
+
+        public static IEnumerable<T> GetPagesByCurrentCulture<T>(Func<T, bool> filter = null) where T : PublishedContentModel
+        {
+            var dataService = DependencyResolver.Current.GetService<IDataService<T>>();
+            return dataService.GetAllByCurrentCulture(filter);
+        }
+
+        public static T GetPageByCurrentCulture<T>(Func<T, bool> filter = null) where T : PublishedContentModel
+        {
+            var dataService = DependencyResolver.Current.GetService<IDataService<T>>();
+            return dataService.GetByCurrentCulture(filter);
         }
 
         public static bool SendEmailConfirm(this UmbracoMembersUserManager<UmbracoApplicationMember> userManager, int userId,

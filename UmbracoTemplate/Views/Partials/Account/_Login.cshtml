@@ -42,11 +42,11 @@
                     </div>
                 </div>
                 <p>
-                    @(Html.UrlFor<Register>("Register as a new user", new {@class = "register-link"}))
+                    @(Html.MultiSiteUrlFor<Register>("Register as a new user", new {@class = "register-link"}))
                 </p>
                 //Enable this once you have account confirmation enabled for password reset functionality
                     <p>
-                        @(Html.UrlFor<ForgotPassword>("Forgot your password?"))
+                        @(Html.MultiSiteUrlFor<ForgotPassword>("Forgot your password?"))
                     </p>
             }
         </section>

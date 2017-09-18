@@ -12,17 +12,17 @@ namespace UmbracoTemplate.Controllers.Hijacking
 {
     public class HomeController : RenderMvcController
     {
-        private readonly IDataService<Home> _homeService;
+        private readonly IDataService<Home> _homeDataService;
 
-        public HomeController(IDataService<Home> homeService)
+        public HomeController(IDataService<Home> homeDataService)
         {
-            _homeService = homeService;
+            _homeDataService = homeDataService;
         }
 
         // GET: Home
         public ActionResult Index()
         {
-            var home = _homeService.GetAll().FirstOrDefault();
+            var home = _homeDataService.GetByCurrentCulture();
             return CurrentTemplate(home);
         }
     }

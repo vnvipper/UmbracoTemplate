@@ -21,9 +21,9 @@ public HomeController(IDataService<Home> homeService)
 // GET: Home
 public ActionResult Index()
 {
-  var homes = _homeService.GetAll();
-  // or from my helper (Can use on view by Html.GetPages<Home> to get a page)
-  // home = Helpers.GetPages<Home>();
+  var homes = _homeService.GetAllByCurrentCulture();
+  // or from my helper (Can use on view by Helpers.GetPagesByCurrentCulture<Home> to get a page)
+  // home = Helpers.GetPagesByCurrentCulture<Home>();
   return CurrentTemplate(homes);
 }
 ```
@@ -39,13 +39,13 @@ public HomeController(IDataService<Home> homeService)
 // GET: Home
 public ActionResult Index()
 {
-  var home = _homeService.Get();
-  // or from my helper (Can use on view by Html.GetPage<Home> to get a page)
-  // home = Helpers.GetPage<Home>();
+  var home = _homeService.GetByCurrentCulture();
+  // or from my helper (Can use on view by Helps.GetPageByCurrentCulture<Home> to get a page)
+  // home = Helpers.GetByCurrentCulture<Home>();
   return CurrentTemplate(home);
 }
 ```
 Bring Link Helper on view Comback
 ```
- @(Html.UrlFor<ForgotPassword>("Forgot your password?"))
+ @(Html.MultiSiteUrlFor<ForgotPassword>("Forgot your password?"))
 ```

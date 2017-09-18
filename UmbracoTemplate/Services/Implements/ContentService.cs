@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
@@ -17,16 +18,26 @@ namespace UmbracoTemplate.Services.Implements
             _umbracoHelper = umbracoHelper;
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(Func<T, bool> filter = null)
         {
             var datas = _umbracoHelper.TypedContentAtRoot()
                 .DescendantsOrSelf(GetAliasFrom(typeof(T))).Select(CreateDocument);
             return datas;
         }
 
-        public T Get()
+        public T Get(Func<T, bool> filter = null)
         {
            return GetAll().FirstOrDefault();
+        }
+
+        public IEnumerable<T> GetAllByCurrentCulture(Func<T, bool> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T GetByCurrentCulture(Func<T, bool> filter = null)
+        {
+            throw new NotImplementedException();
         }
 
         private T CreateDocument(IPublishedContent content)

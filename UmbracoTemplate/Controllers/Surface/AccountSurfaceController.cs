@@ -130,7 +130,7 @@ namespace UmbracoTemplate.Controllers.Surface
                 //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                 //return View("~/Views/Partials/Account/_ExternalLoginConfirmation.cshtml", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
                 var url =
-                    $"{Helpers.GetPage<ExternalLoginConfirmation>().Url}?returnUrl={Url.Encode(returnUrl)}&loginProvider={Url.Encode(loginInfo.Login.LoginProvider)}&email={Url.Encode(loginInfo.Email)}";
+                    $"{Helpers.GetPageByCurrentCulture<ExternalLoginConfirmation>().Url}?returnUrl={Url.Encode(returnUrl)}&loginProvider={Url.Encode(loginInfo.Login.LoginProvider)}&email={Url.Encode(loginInfo.Email)}";
                 return RedirectToLocal(url);
             }
         }
@@ -402,7 +402,7 @@ namespace UmbracoTemplate.Controllers.Surface
             }
 
 
-            return RedirectToLocal(result ? _confirmEmailDataService.Get().Url : "/Error");
+            return RedirectToLocal(result ? _confirmEmailDataService.GetByCurrentCulture().Url : "/Error");
         }
 
         [HttpPost]
@@ -435,7 +435,7 @@ namespace UmbracoTemplate.Controllers.Surface
 
                     var updateResult = await UserManager.UpdateAsync(user);
                     //var callbackUrl = Url.Action("ResetPassword", "AccountSurface", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    var callbackUrl = $"{Helpers.GetPage<ResetPassword>().UrlAbsolute()}?code={Url.Encode(code)}";
+                    var callbackUrl = $"{Helpers.GetPageByCurrentCulture<ResetPassword>().UrlAbsolute()}?code={Url.Encode(code)}";
                     await _emailSender.SendMailAsync(user.Email, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     this.Flash(Toastr.INFO, "Please check your email to reset your password.");
                 }
@@ -460,7 +460,7 @@ namespace UmbracoTemplate.Controllers.Surface
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                var message = $"Your password has been reset. Please <a href='{Helpers.GetPage<Login>().Url}'>click here to log in</a>";
+                var message = $"Your password has been reset. Please <a href='{Helpers.GetPageByCurrentCulture<Login>().Url}'>click here to log in</a>";
                 this.Flash(Toastr.INFO, message);
                 return RedirectToCurrentUmbracoPage();
             }
@@ -471,7 +471,7 @@ namespace UmbracoTemplate.Controllers.Surface
                 var result = await UserManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
-                    var message = $"Your password has been reset. Please <a href='{Helpers.GetPage<Login>().Url}'>click here to log in</a>";
+                    var message = $"Your password has been reset. Please <a href='{Helpers.GetPageByCurrentCulture<Login>().Url}'>click here to log in</a>";
                     this.Flash(Toastr.INFO, message);
                     return RedirectToCurrentUmbracoPage();
                 }

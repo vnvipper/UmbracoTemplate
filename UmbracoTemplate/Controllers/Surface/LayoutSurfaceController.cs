@@ -31,7 +31,7 @@ namespace UmbracoTemplate.Controllers.Surface
 
         public ActionResult RenderHead()
         {
-            Settings setting = _settingsDataService.GetAll().FirstOrDefault();
+            Settings setting = _settingsDataService.GetByCurrentCulture();
             NavigationControls navigation = new NavigationControls(CurrentPage);
 
             MetaData model = new MetaData
@@ -48,10 +48,10 @@ namespace UmbracoTemplate.Controllers.Surface
         }
         public ActionResult RenderNavigation()
         {
-            Login loginPage = _loginDataService.Get();
-            Register registerPage = _registerDataService.Get();
-            Home homePage = _homeDataService.Get();
-            Settings settingsPage = _settingsDataService.Get();
+            Login loginPage = _loginDataService.GetByCurrentCulture();
+            Register registerPage = _registerDataService.GetByCurrentCulture();
+            Home homePage = _homeDataService.GetByCurrentCulture();
+            Settings settingsPage = _settingsDataService.GetByCurrentCulture();
 
             Navigation model = new Navigation
             {
@@ -69,7 +69,7 @@ namespace UmbracoTemplate.Controllers.Surface
         {
             Script model = new Script
             {
-                GoogleAnalyticsId = _settingsDataService.Get().GoogleAnalyticsId
+                GoogleAnalyticsId = _settingsDataService.GetByCurrentCulture().GoogleAnalyticsId
             };
             return PartialView("~/Views/Partials/Layout/_Scripts.cshtml", model);
         }
@@ -93,7 +93,7 @@ namespace UmbracoTemplate.Controllers.Surface
             //const int HOME_PAGE_POSITION_IN_PATH = 1;
             //int homePageId = int.Parse(CurrentPage.Path.Split(',')[HOME_PAGE_POSITION_IN_PATH]);
             //IPublishedContent homePage = Umbraco.Content(homePageId);
-            IPublishedContent homePage = _homeDataService.Get();
+            IPublishedContent homePage = _homeDataService.GetByCurrentCulture();
             List<NavigationListItem> nav = new List<NavigationListItem>();
             nav.AddRange(GetChildNavigationList(homePage));
             return nav;
