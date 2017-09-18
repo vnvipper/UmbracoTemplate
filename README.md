@@ -23,7 +23,7 @@ public ActionResult Index()
 {
   var homes = _homeService.GetAll();
   // or from my helper (Can use on view by Html.GetPages<Home> to get a page)
-  // home = Helpers.GetPages();
+  // home = Helpers.GetPages<Home>();
   return CurrentTemplate(homes);
 }
 ```
@@ -41,7 +41,7 @@ public ActionResult Index()
 {
   var home = _homeService.Get();
   // or from my helper (Can use on view by Html.GetPage<Home> to get a page)
-  // home = Helpers.GetPage();
+  // home = Helpers.GetPage<Home>();
   return CurrentTemplate(home);
 }
 ```
