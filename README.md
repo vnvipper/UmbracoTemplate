@@ -5,7 +5,7 @@ Basic useful feature list:
  * Use gulp for managing front-end task
  * Integrate bower for manage front-end library
  * Decouple components by integrating Ninject Ioc container
- * Make query of node in umbraco more easily with IDataService
+ * Make query of node in umbraco more easily with IDataService ( support multi site language and you can inject your new logic if you want :) )
  * Use Identity for authentication and login third party
  
 # Special things
