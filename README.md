@@ -1,6 +1,7 @@
 # Umbraco Template
+Precondition: you must have knowledge about model builder tool (this project take advantage of the functionality of the model builder)
 
-Basic useful feature list:
+Basic useful feature list 
 
  * Use gulp for managing front-end task
  * Integrate bower for manage front-end library
@@ -50,3 +51,14 @@ Bring Link Helper on view Comback
 ```
  @(Html.MultiSiteUrlFor<ForgotPassword>("Forgot your password?"))
 ```
+# How to get setting node 
+* if all site use shared setting (child note is equivalent, do not use setting.Children, it is unnecessary)
+```
+ setting = _settingService.Get();
+```
+
+* if you use saperate setting for multi site (setting node nest inside each home node), use this:
+```
+ setting = _settingService.GetByCurrentCulture();
+```
+# Happy coding
