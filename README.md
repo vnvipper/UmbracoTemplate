@@ -9,6 +9,7 @@ Basic useful feature list
  * Make query of node in umbraco more easily with IDataService ( support multi site language and you can inject your new logic if you want :) )
  * Use Identity for authentication and login third party
  * Dynamic menu
+ * Multisite validation attribite
 
 # Special things
 
@@ -62,3 +63,5 @@ Bring Link Helper on view Comback
  setting = _settingService.GetByCurrentCulture();
 ```
 # Happy coding
+Username: vnvipper@gmail
+password: Abc123456@@@
