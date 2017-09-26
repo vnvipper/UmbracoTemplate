@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using UmbracoTemplate.Infrastructure;
+using UmbracoTemplate.Infrastructure.UmbracoValidationAttribute;
 
 namespace UmbracoTemplate.Models.ViewModels
 {
     public class ContactViewModel
     {
-        [Required]
-        [Display(Name = "First Name:")]
+        [URequired]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
-        [Display(Name = "Last Name:")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
         [EmailAddress]
-        [Display(Name = "Email Address:")]
+        [Display(Name = "Email Address")]
         public string EmailAddress { get; set; }
 
         [Required]
@@ -26,7 +28,7 @@ namespace UmbracoTemplate.Models.ViewModels
         public string  Subject { get; set; }
 
         [Required]
-        [Display(Name = "Message:")]
+        [Display(Name = "Message")]
         public string Message { get; set; }
     }
 }

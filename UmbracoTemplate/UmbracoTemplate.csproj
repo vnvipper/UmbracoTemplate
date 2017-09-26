@@ -533,6 +533,17 @@
     </Compile>
     <Compile Include="Infrastructure\Helpers.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\UCompare.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\UDataType.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\UDisplayName.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\UEmail.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\UMustBeTrue.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\UPhoneAttribute.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\URange.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\URegexValidation.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\URemote.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\UStringLength.cs" />
+    <Compile Include="Infrastructure\UmbracoValidationAttribute\URequired.cs" />
     <Compile Include="Models\Account.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
