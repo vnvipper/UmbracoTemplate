@@ -31,7 +31,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li><a id="registerLink" href="@Model.Register.Url">@Model.Register.Text</a></li>
-        <li><a id="loginLink" href="@Model.Login.Url">@Model.Login.Text</a></li>   
+        <li>@(Html.MultiSiteUrlFor<Register>(new { id = "registerLink" }))</li>
+        <li>@(Html.MultiSiteUrlFor<Login>(new { id = "loginLink" }))</li>
     </ul>
 }

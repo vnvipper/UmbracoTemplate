@@ -9,12 +9,20 @@ namespace UmbracoTemplate.Infrastructure.UmbracoValidationAttribute
     public class UEmail : ValidationAttribute, IClientValidatable
     {
         //Taken from default .NET [EmailAddress] attribute
-        private static Regex _regex = new Regex("^((([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+(\\.([a-z]|\\d|[!#\\$%&'\\*\\+\\-\\/=\\?\\^_`{\\|}~]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])+)*)|((\\x22)((((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(([\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]|\\x21|[\\x23-\\x5b]|[\\x5d-\\x7e]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(\\\\([\\x01-\\x09\\x0b\\x0c\\x0d-\\x7f]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF]))))*(((\\x20|\\x09)*(\\x0d\\x0a))?(\\x20|\\x09)+)?(\\x22)))@((([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-z]|\\d|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.)+(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])|(([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])([a-z]|\\d|-|\\.|_|~|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])*([a-z]|[\\u00A0-\\uD7FF\\uF900-\\uFDCF\\uFDF0-\\uFFEF])))\\.?$", RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        private static Regex _regex = new Regex(@"^(?("")("".+?(?<!\\)""@)|(([0-9a-z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-z])@))" +
+                                                @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-z][-\w]*[0-9a-z]*\.)+[a-z0-9][\-a-z0-9]{0,22}[a-z0-9]))$", 
+            RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture | RegexOptions.Compiled);
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public string ErrorMessageDictionaryKey { get; set; } = "Validate Email Message";
+        private readonly string _errorMessageDictionaryKey;
+        public UEmail()
+        {
+            _errorMessageDictionaryKey = "EmailValidationMessage";
+        }
+
+        public UEmail(string errorMessageDictionaryKey)
+        {
+            _errorMessageDictionaryKey = errorMessageDictionaryKey;
+        }
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -28,7 +36,7 @@ namespace UmbracoTemplate.Infrastructure.UmbracoValidationAttribute
                 if (!result)
                 {
                     //Get the error message to return
-                    var error = Helpers.FormatErrorMessage(validationContext.DisplayName, ErrorMessageDictionaryKey);
+                    var error = Helpers.FormatErrorMessage(validationContext.DisplayName, _errorMessageDictionaryKey);
 
                     //Return error
                     return new ValidationResult(error);
@@ -41,6 +49,7 @@ namespace UmbracoTemplate.Infrastructure.UmbracoValidationAttribute
 
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
         {
+            ErrorMessage = Helpers.GetDictionaryItem(_errorMessageDictionaryKey);
             var error   = FormatErrorMessage(metadata.DisplayName);
             var rule    = new ModelClientValidationRule
             {

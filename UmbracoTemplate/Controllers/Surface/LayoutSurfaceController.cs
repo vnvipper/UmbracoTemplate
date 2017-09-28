@@ -17,15 +17,11 @@ namespace UmbracoTemplate.Controllers.Surface
     public class LayoutSurfaceController : SurfaceController
     {
         private readonly IDataService<Settings> _settingsDataService;
-        private readonly IDataService<Login> _loginDataService;
-        private readonly IDataService<Register> _registerDataService;
         private readonly IDataService<Home> _homeDataService;
 
-        public LayoutSurfaceController(IDataService<Settings> settingsDataService, IDataService<Login> loginDataService, IDataService<Register> registerDataService, IDataService<Home> homeDataService)
+        public LayoutSurfaceController(IDataService<Settings> settingsDataService, IDataService<Home> homeDataService)
         {
             _settingsDataService = settingsDataService;
-            _loginDataService = loginDataService;
-            _registerDataService = registerDataService;
             _homeDataService = homeDataService;
         }
 
@@ -48,20 +44,16 @@ namespace UmbracoTemplate.Controllers.Surface
         }
         public ActionResult RenderNavigation()
         {
-            Login loginPage = _loginDataService.GetByCurrentCulture();
-            Register registerPage = _registerDataService.GetByCurrentCulture();
             Home homePage = _homeDataService.GetByCurrentCulture();
             Settings settingsPage = _settingsDataService.GetByCurrentCulture();
 
             Navigation model = new Navigation
             {
-                Login = new Link(loginPage.Name, loginPage.Url),
-                Register = new Link(registerPage.Name, registerPage.Url),
                 Home = new Link(homePage.Name, homePage.Url),
-                Setting = new Link(settingsPage.SiteName, settingsPage.Url)
+                Setting = new Link(settingsPage.SiteName, settingsPage.Url),
+                NavigationListItems = GetNavigationModelFromDatabase()
             };
 
-            model.NavigationListItems = GetNavigationModelFromDatabase();
 
             return PartialView("~/Views/Partials/Layout/_Navigation.cshtml", model);
         }
@@ -107,7 +99,7 @@ namespace UmbracoTemplate.Controllers.Surface
         private List<NavigationListItem> GetChildNavigationList(IPublishedContent page)
         {
             List<NavigationListItem> listItems = null;
-            var childPages = page.Children.Where(x=>x.IsVisible()).Where(x => x.Level <= 2).Where(x => !x.HasValue("excludeFromTopNavigation") || (x.HasValue("excludeFromTopNavigation") && !x.GetPropertyValue<bool>("excludeFromTopNavigation")));
+            var childPages = page.Children.Where(x=>x.IsVisible()).Where(x => x.Level <= 3).Where(x => !x.HasValue("excludeFromTopNavigation") || (x.HasValue("excludeFromTopNavigation") && !x.GetPropertyValue<bool>("excludeFromTopNavigation")));
             if (childPages != null && childPages.Any() && childPages.Count() > 0)
             {
                 listItems = new List<NavigationListItem>();

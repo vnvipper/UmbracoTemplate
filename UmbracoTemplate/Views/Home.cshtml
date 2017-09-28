@@ -1,7 +1,30 @@
 ﻿@using System.Threading
-@inherits UmbracoViewPage<Home>
+@inherits UmbracoViewPage<HomeViewModel>
 @{
-	Layout = "Master.cshtml";
+    Layout = "Master.cshtml";
 }
 
-Dynamic message @Model.Title
+<!-- Page Heading -->
+<h1 class="my-4">
+    @Model.Home.Title
+</h1>
+
+@foreach (var item in Model.Posts)
+{
+    <!-- Project One -->
+    <div class="row">
+        <div class="col-md-7">
+            <a href="#">
+                <img class="img-responsive" src="@item.FeaturedImage.Url" alt="">
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h3>@item.PostTitle</h3>
+            @Html.Raw(item.PostDescription)
+            <a class="btn btn-primary" href="@item.Url">View Project</a>
+        </div>
+    </div>
+    <!-- /.row -->
+
+    <hr>
+}

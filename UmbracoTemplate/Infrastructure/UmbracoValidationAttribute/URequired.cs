@@ -13,7 +13,7 @@ namespace UmbracoTemplate.Infrastructure.UmbracoValidationAttribute
         private readonly string _dictionaryKey;
         public URequired()
         {
-            _dictionaryKey = "Required Message";
+            _dictionaryKey = "RequiredMessage";
         }
 
         public URequired(string dictionaryKey)

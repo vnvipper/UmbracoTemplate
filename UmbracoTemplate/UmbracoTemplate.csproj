@@ -481,6 +481,7 @@
     <Content Include="Views\Partials\Account\_ForgotPassword.cshtml" />
     <Content Include="Views\Partials\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Post.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -552,8 +553,11 @@
       <LastGenOutput>Builder.generated.cs</LastGenOutput>
     </Compile>
     <Compile Include="Models\Builder.generated.cs">
-      <AutoGen>True</AutoGen>
+      <DependentUpon>Builder.cs</DependentUpon>
       <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\Category.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ConfirmEmail.generated.cs">
@@ -589,6 +593,12 @@
     <Compile Include="Models\NavigationControls.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Post.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Posts.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Register.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
@@ -609,6 +619,7 @@
     <Compile Include="Models\UmbracoIdentity\UmbracoApplicationRole.cs" />
     <Compile Include="Models\UmbracoIdentity\UserPasswordModel.cs" />
     <Compile Include="Models\ViewModels\ContactViewModel.cs" />
+    <Compile Include="Models\ViewModels\HomeViewModel.cs" />
     <Compile Include="Models\ViewModels\Link.cs" />
     <Compile Include="Models\ViewModels\MetaData.cs" />
     <Compile Include="Models\ViewModels\Navigation.cs" />

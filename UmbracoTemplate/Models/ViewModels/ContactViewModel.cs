@@ -11,24 +11,24 @@ namespace UmbracoTemplate.Models.ViewModels
     public class ContactViewModel
     {
         [URequired]
-        [Display(Name = "First Name")]
+        [UDisplayName("FirstName")]
         public string FirstName { get; set; }
 
-        [Required]
-        [Display(Name = "Last Name")]
+        [URequired]
+        [UDisplayName("LastName")]
         public string LastName { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email Address")]
+        [URequired]
+        [UEmail]
+        [UDisplayName("EmailAddress")]
         public string EmailAddress { get; set; }
 
-        [Required]
-        [Display(Name = "Subject")]
+        [URequired]
+        [UDisplayName("Subject")]
         public string  Subject { get; set; }
 
-        [Required]
-        [Display(Name = "Message")]
+        [URequired]
+        [UDisplayName("Message")]
         public string Message { get; set; }
     }
 }
