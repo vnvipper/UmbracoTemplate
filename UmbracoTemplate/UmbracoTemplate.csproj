@@ -578,6 +578,9 @@
     <Compile Include="Models\ForgotPassword.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\HeroContentControls.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Home.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
