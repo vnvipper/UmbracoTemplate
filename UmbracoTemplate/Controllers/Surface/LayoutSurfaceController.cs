@@ -27,7 +27,7 @@ namespace UmbracoTemplate.Controllers.Surface
 
         public ActionResult RenderHead()
         {
-            Settings setting = _settingsDataService.GetByCurrentCulture();
+            Settings setting = _settingsDataService.Get();
             NavigationControls navigation = new NavigationControls(CurrentPage);
 
             MetaData model = new MetaData
@@ -45,7 +45,7 @@ namespace UmbracoTemplate.Controllers.Surface
         public ActionResult RenderNavigation()
         {
             Home homePage = _homeDataService.GetByCurrentCulture();
-            Settings settingsPage = _settingsDataService.GetByCurrentCulture();
+            Settings settingsPage = _settingsDataService.Get();
 
             Navigation model = new Navigation
             {
@@ -61,7 +61,7 @@ namespace UmbracoTemplate.Controllers.Surface
         {
             Script model = new Script
             {
-                GoogleAnalyticsId = _settingsDataService.GetByCurrentCulture().GoogleAnalyticsId
+                GoogleAnalyticsId = _settingsDataService.Get().GoogleAnalyticsId
             };
             return PartialView("~/Views/Partials/Layout/_Scripts.cshtml", model);
         }

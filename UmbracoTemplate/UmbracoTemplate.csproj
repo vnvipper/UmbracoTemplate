@@ -611,6 +611,9 @@
     <Compile Include="Models\Settings.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\SliderControls.generated.cs">
+      <DependentUpon>Builder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\UmbracoIdentity\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\UmbracoIdentity\ExternalLoginListViewModel.cs" />
     <Compile Include="Models\UmbracoIdentity\ForgotPasswordViewModel.cs" />
