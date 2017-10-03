@@ -482,6 +482,7 @@
     <Content Include="Views\Partials\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Post.cshtml" />
+    <Content Include="Views\Partials\Controls\_BootstrapSliders.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -566,6 +567,7 @@
     <Compile Include="Models\Contact.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\HeroImage.cs" />
     <Compile Include="Models\ExternalLoginConfirmation.generated.cs">
       <DependentUpon>Builder.cs</DependentUpon>
     </Compile>

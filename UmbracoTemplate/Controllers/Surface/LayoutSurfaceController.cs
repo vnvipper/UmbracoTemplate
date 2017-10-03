@@ -53,8 +53,6 @@ namespace UmbracoTemplate.Controllers.Surface
                 Setting = new Link(settingsPage.SiteName, settingsPage.Url),
                 NavigationListItems = GetNavigationModelFromDatabase()
             };
-
-
             return PartialView("~/Views/Partials/Layout/_Navigation.cshtml", model);
         }
         public ActionResult RenderScript()

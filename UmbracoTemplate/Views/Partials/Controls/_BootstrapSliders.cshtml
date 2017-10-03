@@ -1,0 +1,41 @@
+﻿@model IEnumerable<UmbracoTemplate.Models.Entities.HeroImage>
+
+@if (Model != null && Model.Any())
+{
+    var count = Model.Count();
+    <div id="bootstrapCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+        @for (int i = 0; i < count; i++)
+        {
+            <li data-target="#bootstrapCarousel" data-slide-to="0" class="@(i == 0?"active":"")"></li>
+        }
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            @for (int i = 0; i < count; i++)
+            {
+                var item = Model.ElementAt(i);
+                <div class="item@(i == 0 ? " active" : "")">
+                    <img src="@item.Image" alt="@item.Image" style="width:100%;">
+                    <div class="carousel-caption">
+                        <h3>@item.Heading</h3>
+                        <p>@item.Subheading</p>
+                    </div>
+                </div>
+            }         
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#bootstrapCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">@Helpers.GetDictionaryItem("Previous")</span>
+        </a>
+        <a class="right carousel-control" href="#bootstrapCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">@Helpers.GetDictionaryItem("Next")</span>
+        </a>
+    </div>
+}
+
