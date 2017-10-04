@@ -16,7 +16,7 @@ namespace UmbracoTemplate.Infrastructure.UmbracoValidationAttribute
         private readonly string _errorMessageDictionaryKey;
         public UEmail()
         {
-            _errorMessageDictionaryKey = "EmailValidationMessage";
+            _errorMessageDictionaryKey = Constants.Dictionary.EMAILVALIDATIONMESSAGE;
         }
 
         public UEmail(string errorMessageDictionaryKey)

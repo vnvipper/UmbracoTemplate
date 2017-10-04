@@ -15,6 +15,8 @@ namespace UmbracoTemplate.Infrastructure
 			public const string DEFAULTVALIDATIONMESSAGE = "DefaultValidationMessage";
 			public const string EMAILVALIDATIONMESSAGE = "EmailValidationMessage";
 			public const string REQUIREDMESSAGE = "RequiredMessage";
+			public const string CONTACTSUCCESS = "ContactSuccess";
+			public const string SENDMAILFAIL = "SendMailFail";
 			public const string EMAILADDRESS = "EmailAddress";
 		}
 	}

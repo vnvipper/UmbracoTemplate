@@ -4,7 +4,9 @@ using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using RedWillow.MvcToastrFlash;
 using Umbraco.Web.Mvc;
+using UmbracoTemplate.Infrastructure;
 using UmbracoTemplate.Models.ViewModels;
 using UmbracoTemplate.Services.Abstracts;
 
@@ -31,8 +33,14 @@ namespace UmbracoTemplate.Controllers.Surface
         {
             if (ModelState.IsValid)
             {
-                _emailSender.SendMail("nguyenpvdtu@gmail.com", model.FirstName, model.Message);
-                TempData["ContactSuccess"] = true;
+                if (_emailSender.SendMail("nguyenpvdtu@gmail.com", model.FirstName, model.Message))
+                {
+                    this.Flash(Toastr.SUCCESS, Umbraco.GetDictionaryValue(Constants.Dictionary.CONTACTSUCCESS));
+                }
+                else
+                {
+                    this.Flash(Toastr.ERROR, Umbraco.GetDictionaryValue(Constants.Dictionary.SENDMAILFAIL));
+                }          
                 return RedirectToCurrentUmbracoPage();
             }
             return CurrentUmbracoPage();
