@@ -1,0 +1,6 @@
+﻿{
+  "javascript": [
+    "~/app_plugins/UmbracoUtilities/utilities.resource.js",
+    "~/app_plugins/UmbracoUtilities/utitlities.controller.js"
+  ]
+}

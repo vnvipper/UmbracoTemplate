@@ -390,6 +390,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\UmbracoUtilities\Utilities.html" />
+    <Content Include="App_Plugins\UmbracoUtilities\utitlities.controller.js" />
     <Content Include="assets\js\script.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="gulpfile.js" />
@@ -416,7 +418,9 @@
     <Content Include="Views\Partials\Grid\Bootstrap2-Fluid.cshtml" />
     <Content Include="Media\Web.config" />
     <Content Include="config\umbracoSettings.config" />
-    <Content Include="config\trees.config" />
+    <Content Include="config\trees.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="config\tinyMceConfig.config" />
     <Content Include="config\scripting.config" />
     <Content Include="config\metablogConfig.config" />
@@ -426,10 +430,14 @@
     <Content Include="config\ExamineSettings.config" />
     <Content Include="config\ExamineIndex.config" />
     <Content Include="config\EmbeddedMedia.config" />
-    <Content Include="config\Dashboard.config" />
+    <Content Include="config\Dashboard.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="config\ClientDependency.config" />
     <Content Include="config\BaseRestExtensions.config" />
-    <Content Include="config\applications.config" />
+    <Content Include="config\applications.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="config\404handlers.config" />
     <Content Include="package.json" />
     <Content Include="assets\sass\_global.scss" />
@@ -483,6 +491,8 @@
     <Content Include="Views\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Post.cshtml" />
     <Content Include="Views\Partials\Controls\_BootstrapSliders.cshtml" />
+    <Content Include="App_Plugins\UmbracoUtilities\package.manifest" />
+    <Content Include="App_Plugins\UmbracoUtilities\utilities.resource.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -522,6 +532,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\UmbracoIdentityStartup.cs" />
+    <Compile Include="Controllers\Api\UtilitiesApiController.cs" />
     <Compile Include="Controllers\Hijacking\ExternalLoginConfirmationController.cs" />
     <Compile Include="Controllers\Hijacking\HomeController.cs" />
     <Compile Include="Controllers\Hijacking\LoginController.cs" />
@@ -533,6 +544,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Constants.cs" />
     <Compile Include="Infrastructure\Helpers.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\UmbracoValidationAttribute\UCompare.cs" />
@@ -651,11 +663,13 @@
     <Folder Include="Content\" />
     <Folder Include="scripts\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\UtilitiesApi\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
+  <PropertyGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
