@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Web;
-
-namespace UmbracoTemplate.Models.ViewModels
+﻿namespace UmbracoTemplate.Models.Entities
 {
     public class Link
     {

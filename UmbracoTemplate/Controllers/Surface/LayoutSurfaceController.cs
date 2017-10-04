@@ -7,10 +7,11 @@ using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 using UmbracoTemplate.Models;
+using UmbracoTemplate.Models.Entities;
 using UmbracoTemplate.Models.ViewModels;
 using UmbracoTemplate.Services.Abstracts;
 using UmbracoTemplate.Services.Implements;
-using Script = UmbracoTemplate.Models.ViewModels.Script;
+using Script = UmbracoTemplate.Models.Entities.Script;
 
 namespace UmbracoTemplate.Controllers.Surface
 {

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Web;
-using Umbraco.Core.Models;
-using Umbraco.Web.Models;
-
-namespace UmbracoTemplate.Models.ViewModels
+﻿namespace UmbracoTemplate.Models.Entities
 {
     public class MetaData
     {
