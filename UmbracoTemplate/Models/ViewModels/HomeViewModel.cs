@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using UmbracoTemplate.Models.Entities;
 
 namespace UmbracoTemplate.Models.ViewModels
 {
@@ -9,5 +10,6 @@ namespace UmbracoTemplate.Models.ViewModels
     {
         public Home Home { get; set; }
         public IEnumerable<Post> Posts { get; set; }
+        public IEnumerable<HeroImage> HeroImages { get; set; }
     }
 }

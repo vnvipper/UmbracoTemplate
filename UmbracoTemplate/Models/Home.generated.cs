@@ -22,7 +22,7 @@ namespace UmbracoTemplate.Models
 {
 	/// <summary>Home</summary>
 	[PublishedContentModel("home")]
-	public partial class Home : PublishedContentModel, INavigationControls
+	public partial class Home : PublishedContentModel, INavigationControls, ISliderControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "home";
@@ -97,6 +97,15 @@ namespace UmbracoTemplate.Models
 		public IPublishedContent SocialImageSharing
 		{
 			get { return UmbracoTemplate.Models.NavigationControls.GetSocialImageSharing(this); }
+		}
+
+		///<summary>
+		/// Sliders
+		///</summary>
+		[ImplementPropertyType("sliders")]
+		public Archetype.Models.ArchetypeModel Sliders
+		{
+			get { return UmbracoTemplate.Models.SliderControls.GetSliders(this); }
 		}
 	}
 }

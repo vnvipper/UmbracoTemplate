@@ -22,7 +22,7 @@ namespace UmbracoTemplate.Models
 {
 	/// <summary>Settings</summary>
 	[PublishedContentModel("settings")]
-	public partial class Settings : PublishedContentModel, INavigationControls
+	public partial class Settings : PublishedContentModel
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "settings";
@@ -88,51 +88,6 @@ namespace UmbracoTemplate.Models
 		public Archetype.Models.ArchetypeModel SocialNetwork
 		{
 			get { return this.GetPropertyValue<Archetype.Models.ArchetypeModel>("socialNetwork"); }
-		}
-
-		///<summary>
-		/// Browser Title
-		///</summary>
-		[ImplementPropertyType("browserTitle")]
-		public string BrowserTitle
-		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetBrowserTitle(this); }
-		}
-
-		///<summary>
-		/// Exclude From Top Navigation
-		///</summary>
-		[ImplementPropertyType("excludeFromTopNavigation")]
-		public bool ExcludeFromTopNavigation
-		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetExcludeFromTopNavigation(this); }
-		}
-
-		///<summary>
-		/// Keywords: Keywords that describe the content of the page. This is consired optional since most modern search engines don't use this anymore
-		///</summary>
-		[ImplementPropertyType("keywords")]
-		public IEnumerable<string> Keywords
-		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetKeywords(this); }
-		}
-
-		///<summary>
-		/// Description: A brief description of the content on your page. This text is shown below the title in a google search result and also used for Social Sharing Cards. The ideal length is between 130 and 155 characters
-		///</summary>
-		[ImplementPropertyType("seoMetaDescription")]
-		public string SeoMetaDescription
-		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetSeoMetaDescription(this); }
-		}
-
-		///<summary>
-		/// Social Image Sharing
-		///</summary>
-		[ImplementPropertyType("socialImageSharing")]
-		public IPublishedContent SocialImageSharing
-		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetSocialImageSharing(this); }
 		}
 	}
 }

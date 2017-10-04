@@ -20,9 +20,17 @@ using Umbraco.ModelsBuilder.Umbraco;
 
 namespace UmbracoTemplate.Models
 {
+	// Mixin content Type 1199 with alias "sliderControls"
+	/// <summary>Slider Controls</summary>
+	public partial interface ISliderControls : IPublishedContent
+	{
+		/// <summary>Sliders</summary>
+		Archetype.Models.ArchetypeModel Sliders { get; }
+	}
+
 	/// <summary>Slider Controls</summary>
 	[PublishedContentModel("sliderControls")]
-	public partial class SliderControls : PublishedContentModel
+	public partial class SliderControls : PublishedContentModel, ISliderControls
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "sliderControls";
@@ -51,7 +59,10 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("sliders")]
 		public Archetype.Models.ArchetypeModel Sliders
 		{
-			get { return this.GetPropertyValue<Archetype.Models.ArchetypeModel>("sliders"); }
+			get { return GetSliders(this); }
 		}
+
+		/// <summary>Static getter for Sliders</summary>
+		public static Archetype.Models.ArchetypeModel GetSliders(ISliderControls that) { return that.GetPropertyValue<Archetype.Models.ArchetypeModel>("sliders"); }
 	}
 }
