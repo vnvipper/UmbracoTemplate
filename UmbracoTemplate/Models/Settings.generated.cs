@@ -46,6 +46,24 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
+		/// Email Password
+		///</summary>
+		[ImplementPropertyType("emailPassword")]
+		public string EmailPassword
+		{
+			get { return this.GetPropertyValue<string>("emailPassword"); }
+		}
+
+		///<summary>
+		/// Email Sender
+		///</summary>
+		[ImplementPropertyType("emailSender")]
+		public string EmailSender
+		{
+			get { return this.GetPropertyValue<string>("emailSender"); }
+		}
+
+		///<summary>
 		/// Favicon
 		///</summary>
 		[ImplementPropertyType("favicon")]
@@ -61,6 +79,24 @@ namespace UmbracoTemplate.Models
 		public string GoogleAnalyticsId
 		{
 			get { return this.GetPropertyValue<string>("googleAnalyticsId"); }
+		}
+
+		///<summary>
+		/// Mail Port
+		///</summary>
+		[ImplementPropertyType("mailPort")]
+		public int MailPort
+		{
+			get { return this.GetPropertyValue<int>("mailPort"); }
+		}
+
+		///<summary>
+		/// Mail Server
+		///</summary>
+		[ImplementPropertyType("mailServer")]
+		public string MailServer
+		{
+			get { return this.GetPropertyValue<string>("mailServer"); }
 		}
 
 		///<summary>

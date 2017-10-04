@@ -454,21 +454,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Views\Partials\Layout\_Scripts.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ShowRoles.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ResetPassword.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\RemoveAccountList.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\Register.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\Profile.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ManagePassword.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\Manage.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\LoginStatus.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\Login.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ForgotPassword.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ExternalLoginsList.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\UmbracoIdentityAccount\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\AccountLayout.cshtml" />
     <Content Include="Views\Account.cshtml" />
     <Content Include="Views\Partials\Layout\_Navigation.cshtml" />
@@ -530,6 +515,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\MapperConfiguration.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\UmbracoIdentityStartup.cs" />
     <Compile Include="Controllers\Api\UtilitiesApiController.cs" />
@@ -540,7 +526,6 @@
     <Compile Include="Controllers\Surface\AccountSurfaceController.cs" />
     <Compile Include="Controllers\Surface\ContactSurfaceController.cs" />
     <Compile Include="Controllers\Surface\LayoutSurfaceController.cs" />
-    <Compile Include="Controllers\UmbracoIdentityAccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
