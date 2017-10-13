@@ -16,6 +16,7 @@ namespace UmbracoTemplate
         protected override void OnApplicationStarted(object sender, EventArgs e)
         {
             base.OnApplicationStarted(sender, e);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             // Custom mapper and interesting thing here
             MapperConfiguration.Setup();
         }
