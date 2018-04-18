@@ -46,6 +46,24 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
+		/// Cache Buster
+		///</summary>
+		[ImplementPropertyType("cacheBuster")]
+		public string CacheBuster
+		{
+			get { return this.GetPropertyValue<string>("cacheBuster"); }
+		}
+
+		///<summary>
+		/// Coordinate
+		///</summary>
+		[ImplementPropertyType("coordinate")]
+		public string Coordinate
+		{
+			get { return this.GetPropertyValue<string>("coordinate"); }
+		}
+
+		///<summary>
 		/// Email Password
 		///</summary>
 		[ImplementPropertyType("emailPassword")]
@@ -61,6 +79,15 @@ namespace UmbracoTemplate.Models
 		public string EmailSender
 		{
 			get { return this.GetPropertyValue<string>("emailSender"); }
+		}
+
+		///<summary>
+		/// Facebook App Id
+		///</summary>
+		[ImplementPropertyType("facebookAppId")]
+		public string FacebookAppId
+		{
+			get { return this.GetPropertyValue<string>("facebookAppId"); }
 		}
 
 		///<summary>
@@ -82,6 +109,24 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
+		/// Google API key
+		///</summary>
+		[ImplementPropertyType("googleAPIKey")]
+		public string GoogleApikey
+		{
+			get { return this.GetPropertyValue<string>("googleAPIKey"); }
+		}
+
+		///<summary>
+		/// Google Tag Manager Id
+		///</summary>
+		[ImplementPropertyType("googleTagManagerId")]
+		public string GoogleTagManagerId
+		{
+			get { return this.GetPropertyValue<string>("googleTagManagerId"); }
+		}
+
+		///<summary>
 		/// Mail Port
 		///</summary>
 		[ImplementPropertyType("mailPort")]
@@ -100,6 +145,42 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
+		/// Map Default Zoom Level
+		///</summary>
+		[ImplementPropertyType("mapDefaultZoomLevel")]
+		public int MapDefaultZoomLevel
+		{
+			get { return this.GetPropertyValue<int>("mapDefaultZoomLevel"); }
+		}
+
+		///<summary>
+		/// Partial View Caching
+		///</summary>
+		[ImplementPropertyType("partialViewCaching")]
+		public int PartialViewCaching
+		{
+			get { return this.GetPropertyValue<int>("partialViewCaching"); }
+		}
+
+		///<summary>
+		/// Recaptcha Secret Key
+		///</summary>
+		[ImplementPropertyType("recaptchaSecretKey")]
+		public string RecaptchaSecretKey
+		{
+			get { return this.GetPropertyValue<string>("recaptchaSecretKey"); }
+		}
+
+		///<summary>
+		/// Recaptcha Site Key
+		///</summary>
+		[ImplementPropertyType("recaptchaSiteKey")]
+		public string RecaptchaSiteKey
+		{
+			get { return this.GetPropertyValue<string>("recaptchaSiteKey"); }
+		}
+
+		///<summary>
 		/// Site logo
 		///</summary>
 		[ImplementPropertyType("siteLogo")]
@@ -109,7 +190,7 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
-		/// Site name
+		/// Site Name
 		///</summary>
 		[ImplementPropertyType("siteName")]
 		public string SiteName
@@ -124,6 +205,15 @@ namespace UmbracoTemplate.Models
 		public Archetype.Models.ArchetypeModel SocialNetwork
 		{
 			get { return this.GetPropertyValue<Archetype.Models.ArchetypeModel>("socialNetwork"); }
+		}
+
+		///<summary>
+		/// Use Ssl
+		///</summary>
+		[ImplementPropertyType("useSsl")]
+		public bool UseSsl
+		{
+			get { return this.GetPropertyValue<bool>("useSsl"); }
 		}
 	}
 }

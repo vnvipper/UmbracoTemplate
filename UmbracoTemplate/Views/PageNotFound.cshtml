@@ -1,0 +1,30 @@
+﻿@inherits UmbracoViewPage<PageNotFound>
+@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Not Found</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/assets/css/404.css" />
+</head>
+<body>
+<div class="bg-404">
+    <div class="content">
+        @if (!string.IsNullOrEmpty(Model.PageTitle))
+        {
+            <h2>@Model.PageTitle</h2>
+        }
+        @if (!string.IsNullOrEmpty(Model?.PageImage?.Url))
+        {
+            <img src="@Model.PageImage.Url" alt="@Model.PageImage.Url">
+        }
+        @Html.Raw(Model.PageDescription)
+    </div>
+</div>
+</body>
+</html>

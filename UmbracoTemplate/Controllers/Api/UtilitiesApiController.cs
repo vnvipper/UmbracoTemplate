@@ -17,7 +17,7 @@ namespace UmbracoTemplate.Controllers.Api
         {
 
             var dictionaries = GetDictionaryItems();
-            string filePath = HttpContext.Current.Server.MapPath("~/Infrastructure/Constants.cs");
+            string filePath = HttpContext.Current.Server.MapPath("~/Infrastructure/DictionaryConstants.cs");
             FileInfo fi = new FileInfo(filePath);
             //open file for write operation
             FileStream fsToWrite = fi.Open(FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
@@ -32,18 +32,14 @@ namespace UmbracoTemplate.Controllers.Api
             content.AppendLine("namespace UmbracoTemplate.Infrastructure");
             content.AppendLine("{");
 
-            content.AppendLine($"\tpublic static class Constants");
+            content.AppendLine($"\tpublic static class DictionaryConstants");
             content.AppendLine("\t{");
 
-            content.AppendLine($"\t\tpublic static class Dictionary");
-            content.AppendLine("\t\t{");
             foreach (var dictionary in dictionaries)
             {
                 content.AppendLine(
-                    $"\t\t\tpublic const string {dictionary.ToUpper().Replace(" ", "_")} = \"{dictionary}\";");
+                    $"\t\tpublic const string {dictionary.ToUpper().Replace(" ", "_")} = \"{dictionary}\";");
             }
-            content.AppendLine("\t\t}");
-
             content.AppendLine("\t}");
 
             content.AppendLine("}");

@@ -1,5 +1,4 @@
-﻿
-@model ContactViewModel
+﻿@model ContactViewModel
 <div class="row">
     @using (Html.BeginUmbracoForm("SubmitForm", "ContactSurface", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
@@ -43,10 +42,18 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Send" class="btn btn-default" />
+            <div class="col-md-10 col-md-push-2">
+                <div class="g-recaptcha" data-sitekey="@(Helpers.GetPage<Settings>().RecaptchaSiteKey)"></div>
+                @Html.ValidationMessage("recapchaError", new { @class = "text-danger" })
             </div>
         </div>
-    }
-</div>
+          
+            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Send" class="btn btn-default"/>
+                </div>
+            </div>
+            }
+        </div>
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
+using PagedList;
 using Umbraco.Core.Models;
 using Umbraco.Web.Mvc;
 using UmbracoTemplate.Models;
@@ -26,14 +27,18 @@ namespace UmbracoTemplate.Controllers.Hijacking
         }
 
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
             HomeViewModel model = new HomeViewModel
             {
                 Home = new Home(CurrentPage),
-                Posts = _postDataService.GetAllByCurrentCulture()
+                Articles = _postDataService.GetAllByCurrentCulture().Select(Mapper.Map<Article>)
+                    .OrderByDescending(m => m.PostedDate).ToPagedList(pageNumber, pageSize)
             };
-            model.HeroImages = model.Home.Sliders.Select(m => Mapper.Map<HeroImage>(m));
+            model.HeroImages = model.Home.Sliders.Select(Mapper.Map<HeroImage>);
             return CurrentTemplate(model);
         }
     }

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Net;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Microsoft.AspNet.Identity;
+using Ninject.Activation;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
-using UmbracoIdentity;
-using UmbracoTemplate.Models.UmbracoIdentity;
+using UmbracoTemplate.Models.Entities;
 using UmbracoTemplate.Services.Abstracts;
 
 namespace UmbracoTemplate.Infrastructure
@@ -29,46 +32,59 @@ namespace UmbracoTemplate.Infrastructure
         }
         public static IHtmlString UrlFor<T>(this HtmlHelper helper, string innerText, object htmlAttributes = null, Func<T, bool> filter = null) where T: PublishedContentModel
         {
-            var page = GetPage<T>(filter);
-            TagBuilder a = new TagBuilder("a");
-            a.Attributes.Add("href", page.Url);
-            a.InnerHtml = innerText;
-            a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+            var page = GetPage(filter);
+            if (page != null)
+            {
+                TagBuilder a = new TagBuilder("a");
+                a.Attributes.Add("href", page.Url);
+                a.InnerHtml = innerText;
+                a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
 
-            return MvcHtmlString.Create(a.ToString());
+                return MvcHtmlString.Create(a.ToString());
+            }
+            return MvcHtmlString.Create("");
         }
 
         public static IHtmlString UrlFor<T>(this HtmlHelper helper, object htmlAttributes = null, Func<T, bool> filter = null) where T : PublishedContentModel
         {
-            var page = GetPage<T>(filter);
-            TagBuilder a = new TagBuilder("a");
-            a.Attributes.Add("href", page.Url);
-            a.InnerHtml = page.Name;
-            a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
-
-            return MvcHtmlString.Create(a.ToString());
+            var page = GetPage(filter);
+            if (page != null)
+            {
+                TagBuilder a = new TagBuilder("a");
+                a.Attributes.Add("href", page.Url);
+                a.InnerHtml = page.Name;
+                a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+                return MvcHtmlString.Create(a.ToString());
+            }
+            return MvcHtmlString.Create("");
         }
 
         public static IHtmlString MultiSiteUrlFor<T>(this HtmlHelper helper, string innerText, object htmlAttributes = null, Func<T, bool> filter = null) where T : PublishedContentModel
         {
-            var page = GetPageByCurrentCulture<T>(filter);
-            TagBuilder a = new TagBuilder("a");
-            a.Attributes.Add("href", page.Url);
-            a.InnerHtml = innerText;
-            a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
-
-            return MvcHtmlString.Create(a.ToString());
+            var page = GetPageByCurrentCulture(filter);
+            if (page != null)
+            {
+                TagBuilder a = new TagBuilder("a");
+                a.Attributes.Add("href", page.Url);
+                a.InnerHtml = innerText;
+                a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+                return MvcHtmlString.Create(a.ToString());
+            }
+            return MvcHtmlString.Create("");
         }
 
         public static IHtmlString MultiSiteUrlFor<T>(this HtmlHelper helper, object htmlAttributes = null, Func<T, bool> filter = null) where T : PublishedContentModel
         {
-            var page = GetPageByCurrentCulture<T>(filter);
-            TagBuilder a = new TagBuilder("a");
-            a.Attributes.Add("href", page.Url);
-            a.InnerHtml = page.Name;
-            a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
-
-            return MvcHtmlString.Create(a.ToString());
+            var page = GetPageByCurrentCulture(filter);
+            if (page != null)
+            {
+                TagBuilder a = new TagBuilder("a");
+                a.Attributes.Add("href", page.Url);
+                a.InnerHtml = page.Name;
+                a.MergeAttributes(new RouteValueDictionary(htmlAttributes));
+                return MvcHtmlString.Create(a.ToString());
+            }
+            return MvcHtmlString.Create("");
         }
 
         public static IEnumerable<T> GetPages<T>(Func<T, bool> filter = null) where T : PublishedContentModel
@@ -117,15 +133,66 @@ namespace UmbracoTemplate.Infrastructure
             //Sanity checking it's not empty
             if (string.IsNullOrEmpty(error))
             {
-                throw new Exception(string.Format("The dictionary key '{0}' for the required error message is empty or does not exist", errorMessageDictionaryKey));
+                throw new Exception(
+                    $"The dictionary key '{errorMessageDictionaryKey}' for the required error message is empty or does not exist");
             }
 
             // String replacment the token wiht our localised propertyname
             // The {{Field}} field is required
-            error = error.Replace("{{Field}}", name);
+            error = error.Replace("{0}", name);
 
             //Return the value
             return error;
+        }
+
+        public static bool IsValidRecaptcha(string recaptcha)
+        {
+            if (string.IsNullOrEmpty(recaptcha))
+            {
+                return false;
+            }
+            var secretKey = GetPage<Models.Settings>().RecaptchaSecretKey;
+            string remoteIp = HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+            string myParameters = $"secret={secretKey}&response={recaptcha}&remoteip={remoteIp}";
+            using (var wc = new WebClient())
+            {
+                wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                var json = wc.UploadString("https://www.google.com/recaptcha/api/siteverify", myParameters);
+                var js = new DataContractJsonSerializer(typeof(RecaptchaResult));
+                var ms = new MemoryStream(Encoding.ASCII.GetBytes(json));
+                var captchaResult = js.ReadObject(ms) as RecaptchaResult;
+                if (captchaResult != null && captchaResult.Success)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// make nice string
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string ToNiceString(this string source)
+        {
+            if (string.IsNullOrEmpty(source)) return string.Empty;
+            source = Regex.Replace(source, @"[^a-zA-Z0-9\s-,]", "");
+            return !string.IsNullOrEmpty(source) ? source.ToLower().Replace(" ", "-").Replace("--", "-") : string.Empty;
+        }
+
+        public static string ToCultureDateString(this DateTime source)
+        {
+            return source.ToString(GetDictionaryItem(DictionaryConstants.DATETIMEFORMAT));
+        }
+
+        public static string ToCultureLongDateString(this DateTime source)
+        {
+            return source.ToString(GetDictionaryItem(DictionaryConstants.LONGDATEFORMAT));
         }
     }
 }

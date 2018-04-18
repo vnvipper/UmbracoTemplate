@@ -29,17 +29,20 @@ namespace UmbracoTemplate.Controllers.Surface
         public ActionResult RenderHead()
         {
             Settings setting = _settingsDataService.Get();
-            NavigationControls navigation = new NavigationControls(CurrentPage);
+            Home home = _homeDataService.GetByCurrentCulture();
+            MetaDataControl navigation = new MetaDataControl(CurrentPage);
 
             MetaData model = new MetaData
             {
-                BrowserTitle = $"{(string.IsNullOrEmpty(navigation.BrowserTitle) ? CurrentPage.Name : navigation.Name)} - {setting?.SiteName}",
+                BrowserTitle = $"{(string.IsNullOrEmpty(navigation.BrowserTitle) ? CurrentPage.Name : navigation.Name)}",
                 Description = navigation.SeoMetaDescription,
                 Keywords = navigation.Keywords == null ? "" : string.Join(", ", navigation.Keywords),
-                ImageUrl = AbsoluteUrl(navigation.SocialImageSharing?.Url) ?? AbsoluteUrl(setting?.SiteLogo?.Url),
+                ImageUrl = AbsoluteUrl(navigation.SocialImageSharing?.Url) ?? AbsoluteUrl(home?.SocialImageSharing?.Url) ?? AbsoluteUrl(setting?.SiteLogo?.Url),
                 PageUrl = AbsoluteUrl(navigation.Url),
                 Title = navigation.Name,
-                SiteName = setting?.SiteName
+                SiteName = setting?.SiteName,
+                CacheBusterVersion = setting?.CacheBuster,
+                FavIcon = setting?.Favicon?.Url
             };
             return PartialView("~/Views/Partials/Layout/_MetaData.cshtml", model);
         }
@@ -58,9 +61,11 @@ namespace UmbracoTemplate.Controllers.Surface
         }
         public ActionResult RenderScript()
         {
+            var settings = _settingsDataService.Get();
             Script model = new Script
             {
-                GoogleAnalyticsId = _settingsDataService.Get().GoogleAnalyticsId
+                GoogleAnalyticsId = settings.GoogleAnalyticsId,
+                CacheBusterVersion = settings.CacheBuster
             };
             return PartialView("~/Views/Partials/Layout/_Scripts.cshtml", model);
         }

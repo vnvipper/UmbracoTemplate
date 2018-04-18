@@ -1,0 +1,82 @@
+/*
+    dimension definition
+*/
+/*Font - start*/
+/*Font - end*/
+/*Color - start*/
+/*Color - end*/
+@font-face {
+  font-family: 'RalewayBold';
+  src: url("../fonts/Raleway-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'RalewaySemiBold';
+  src: url("../fonts/Raleway-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'RalewayRegular';
+  src: url("../fonts/Raleway-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  margin: 0; }
+
+.bg-404 {
+  position: relative;
+  background: url(/assets/images/404.jpg) no-repeat center center;
+  height: 100vh; }
+  .bg-404 .content {
+    position: absolute;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+    .bg-404 .content h2, .bg-404 .content h3 {
+      color: #00003c; }
+    .bg-404 .content h2 {
+      font-family: "Hiragino Kaku Gothic Pro W3", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
+      font-weight: bold;
+      font-size: 48px;
+      margin: 0; }
+      @media (min-width: 768px) and (max-width: 991px) {
+        .bg-404 .content h2 {
+          font-size: 36px; } }
+      @media (max-width: 767px) {
+        .bg-404 .content h2 {
+          font-size: 22px; } }
+    .bg-404 .content img {
+      margin-top: 20px;
+      width: 300px; }
+      @media (min-width: 768px) and (max-width: 991px) {
+        .bg-404 .content img {
+          width: 270px; } }
+      @media (max-width: 767px) {
+        .bg-404 .content img {
+          width: 240px; } }
+    .bg-404 .content h3 {
+      font-family: "Hiragino Kaku Gothic Pro W3", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
+      font-size: 24px;
+      line-height: 1.4;
+      margin: 20px 0 0; }
+      @media (min-width: 768px) and (max-width: 991px) {
+        .bg-404 .content h3 {
+          font-size: 21px; } }
+      @media (max-width: 767px) {
+        .bg-404 .content h3 {
+          font-size: 18px; } }
+      .bg-404 .content h3 a {
+        display: inline;
+        color: #878c9b; }

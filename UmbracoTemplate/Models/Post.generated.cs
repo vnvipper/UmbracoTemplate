@@ -22,7 +22,7 @@ namespace UmbracoTemplate.Models
 {
 	/// <summary>Post</summary>
 	[PublishedContentModel("post")]
-	public partial class Post : PublishedContentModel, INavigationControls
+	public partial class Post : PublishedContentModel, IMetaDataControl
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "post";
@@ -55,7 +55,7 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
-		/// Post Content
+		/// Content
 		///</summary>
 		[ImplementPropertyType("postContent")]
 		public IHtmlString PostContent
@@ -64,12 +64,21 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
-		/// Post Description
+		/// Description
 		///</summary>
 		[ImplementPropertyType("postDescription")]
 		public IHtmlString PostDescription
 		{
 			get { return this.GetPropertyValue<IHtmlString>("postDescription"); }
+		}
+
+		///<summary>
+		/// Posted Date
+		///</summary>
+		[ImplementPropertyType("postedDate")]
+		public DateTime PostedDate
+		{
+			get { return this.GetPropertyValue<DateTime>("postedDate"); }
 		}
 
 		///<summary>
@@ -82,7 +91,7 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
-		/// Post Title
+		/// Title
 		///</summary>
 		[ImplementPropertyType("postTitle")]
 		public string PostTitle
@@ -91,21 +100,12 @@ namespace UmbracoTemplate.Models
 		}
 
 		///<summary>
-		/// Published Date
-		///</summary>
-		[ImplementPropertyType("publishedDate")]
-		public DateTime PublishedDate
-		{
-			get { return this.GetPropertyValue<DateTime>("publishedDate"); }
-		}
-
-		///<summary>
 		/// Browser Title
 		///</summary>
 		[ImplementPropertyType("browserTitle")]
 		public string BrowserTitle
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetBrowserTitle(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetBrowserTitle(this); }
 		}
 
 		///<summary>
@@ -114,7 +114,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("excludeFromTopNavigation")]
 		public bool ExcludeFromTopNavigation
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetExcludeFromTopNavigation(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetExcludeFromTopNavigation(this); }
 		}
 
 		///<summary>
@@ -123,7 +123,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("keywords")]
 		public IEnumerable<string> Keywords
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetKeywords(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetKeywords(this); }
 		}
 
 		///<summary>
@@ -132,7 +132,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("seoMetaDescription")]
 		public string SeoMetaDescription
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetSeoMetaDescription(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetSeoMetaDescription(this); }
 		}
 
 		///<summary>
@@ -141,7 +141,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("socialImageSharing")]
 		public IPublishedContent SocialImageSharing
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetSocialImageSharing(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetSocialImageSharing(this); }
 		}
 	}
 }

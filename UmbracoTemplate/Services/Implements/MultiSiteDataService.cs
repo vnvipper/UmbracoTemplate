@@ -21,7 +21,6 @@ namespace UmbracoTemplate.Services.Implements
 
         public IEnumerable<T> GetAll(Func<T, bool> filter = null)
         {
-            var currentCulture = Thread.CurrentThread.CurrentCulture.Name;
             var datas = _umbracoHelper.TypedContentAtRoot()
                 .DescendantsOrSelf(GetAliasFrom(typeof(T)))               
                 .Select(CreateDocument);

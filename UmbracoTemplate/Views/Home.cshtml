@@ -1,4 +1,5 @@
 ﻿@using System.Threading
+@using PagedList.Mvc;
 @inherits UmbracoViewPage<HomeViewModel>
 @{
     Layout = "Master.cshtml";
@@ -9,18 +10,18 @@
     @Model.Home.Title
 </h1>
 
-@foreach (var item in Model.Posts)
+@foreach (var item in Model.Articles)
 {
     <!-- Project One -->
     <div class="row">
         <div class="col-md-7">
-            <a href="#">
-                <img class="img-responsive" src="@item.FeaturedImage.Url" alt="">
+            <a href="@item.Url">
+                <img class="img-responsive" src="@(item.FeaturedImage?.Url)" alt="">
             </a>
         </div>
         <div class="col-md-5">
-            <h3>@item.PostTitle</h3>
-            @Html.Raw(item.PostDescription)
+            <h3>@item.Title</h3>
+            @Html.Raw(item.Description)
             <a class="btn btn-primary" href="@item.Url">View Project</a>
         </div>
     </div>
@@ -28,3 +29,7 @@
 
     <hr>
 }
+
+<div>
+    @Html.PagedListPager(Model.Articles, page => Model.Home.Url + "?page="+page)
+</div>

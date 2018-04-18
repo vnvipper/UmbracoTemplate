@@ -22,7 +22,7 @@ namespace UmbracoTemplate.Models
 {
 	/// <summary>Account</summary>
 	[PublishedContentModel("account")]
-	public partial class Account : PublishedContentModel, INavigationControls
+	public partial class Account : PublishedContentModel, IMetaDataControl
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "account";
@@ -51,7 +51,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("browserTitle")]
 		public string BrowserTitle
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetBrowserTitle(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetBrowserTitle(this); }
 		}
 
 		///<summary>
@@ -60,7 +60,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("excludeFromTopNavigation")]
 		public bool ExcludeFromTopNavigation
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetExcludeFromTopNavigation(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetExcludeFromTopNavigation(this); }
 		}
 
 		///<summary>
@@ -69,7 +69,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("keywords")]
 		public IEnumerable<string> Keywords
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetKeywords(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetKeywords(this); }
 		}
 
 		///<summary>
@@ -78,7 +78,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("seoMetaDescription")]
 		public string SeoMetaDescription
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetSeoMetaDescription(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetSeoMetaDescription(this); }
 		}
 
 		///<summary>
@@ -87,7 +87,7 @@ namespace UmbracoTemplate.Models
 		[ImplementPropertyType("socialImageSharing")]
 		public IPublishedContent SocialImageSharing
 		{
-			get { return UmbracoTemplate.Models.NavigationControls.GetSocialImageSharing(this); }
+			get { return UmbracoTemplate.Models.MetaDataControl.GetSocialImageSharing(this); }
 		}
 	}
 }

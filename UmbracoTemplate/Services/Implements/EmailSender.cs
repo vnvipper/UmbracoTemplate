@@ -53,7 +53,7 @@ namespace UmbracoTemplate.Services.Implements
 
                         client.Port = setting.MailPort;
                         client.Credentials = new System.Net.NetworkCredential(setting.EmailSender, setting.EmailPassword);
-                        client.EnableSsl = true;
+                        client.EnableSsl = setting.UseSsl;
 
                         client.Send(msg);
                     }
@@ -99,7 +99,7 @@ namespace UmbracoTemplate.Services.Implements
 
                         client.Port = setting.MailPort;
                         client.Credentials = new System.Net.NetworkCredential(setting.EmailSender, setting.EmailPassword);
-                        client.EnableSsl = true;
+                        client.EnableSsl = setting.UseSsl;
 
                         await client.SendMailAsync(msg);
                     }

@@ -9,5 +9,7 @@
         public string ImageUrl { get; set; }
         public string  PageUrl { get; set; }
         public string SiteName { get; set; }
+        public string CacheBusterVersion { get; set; }
+        public string FavIcon { get; set; }
     }
 }

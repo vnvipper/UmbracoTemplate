@@ -292,8 +292,4 @@ __pycache__/
 !**/App_Data/[Pp]ackages/
 !**/[Uu]mbraco/[Dd]eveloper/[Pp]ackages
 
-**/assets/css
-**/assets/**/*.min.js
-**/assets/lib
-
 ![Bb]in/Archetype.dll

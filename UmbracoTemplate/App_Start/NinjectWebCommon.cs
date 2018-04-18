@@ -1,5 +1,7 @@
+using Ninject.Web.Common.WebHost;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UmbracoTemplate.App_Start.NinjectWebCommon), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(UmbracoTemplate.App_Start.NinjectWebCommon), "Stop")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(UmbracoTemplate.App_Start.NinjectWebCommon), "Stop")]
 
 namespace UmbracoTemplate.App_Start
 {
@@ -13,7 +15,7 @@ namespace UmbracoTemplate.App_Start
 
     public static class NinjectWebCommon 
     {
-        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
@@ -22,7 +24,7 @@ namespace UmbracoTemplate.App_Start
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
-            bootstrapper.Initialize(CreateKernel);
+            Bootstrapper.Initialize(CreateKernel);
         }
         
         /// <summary>
@@ -30,7 +32,7 @@ namespace UmbracoTemplate.App_Start
         /// </summary>
         public static void Stop()
         {
-            bootstrapper.ShutDown();
+            Bootstrapper.ShutDown();
         }
         
         /// <summary>

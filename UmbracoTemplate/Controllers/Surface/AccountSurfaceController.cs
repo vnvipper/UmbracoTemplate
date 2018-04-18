@@ -22,6 +22,7 @@ using UmbracoTemplate.Models;
 using UmbracoTemplate.Services.Abstracts;
 using IdentityExtensions = UmbracoIdentity.IdentityExtensions;
 using RedWillow.MvcToastrFlash;
+using IEmailSender = UmbracoTemplate.Services.Abstracts.IEmailSender;
 
 
 namespace UmbracoTemplate.Controllers.Surface
